@@ -10,7 +10,7 @@ class ReviewController < ApplicationController
   
   def create
     @review = Review.new_pending
-    
+        
     if @review.save    
       @commit = @review.commits.create(params[:commit])
       if @commit.save

@@ -7,5 +7,6 @@ class Review < ActiveRecord::Base
     review = Review.new
     review.date = Time.now
     review.status = :pending
+    return review
   end
 end
