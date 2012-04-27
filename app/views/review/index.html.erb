@@ -1,0 +1,14 @@
+<% @reviews.each do |review| %>
+  <ul>
+	<li><%= review.date %></li>
+	<li><%= review.status %></li>
+	<% review.commits.each do |commit| %>
+		<ul>
+			<li><%= commit.branch %></li>
+			<li><%= commit.shorthash %></li>
+			<li><%= commit.email %></li>
+			<li><%= commit.message %></li>
+		</ul>
+	<% end %>
+  </ul>
+<% end %>

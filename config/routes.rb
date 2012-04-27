@@ -1,4 +1,7 @@
 Reviewme::Application.routes.draw do
+  
+  resources :review
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
