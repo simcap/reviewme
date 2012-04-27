@@ -1,11 +1,18 @@
 class ReviewController < ApplicationController
   
   def index
-    @reviews = Review.all
+    @reviews = Review.where(:status => :pending)
   end
   
   def show
     @review = Review.find(params[:id])
+  end
+  
+  def update
+    @review = Review.find(params[:id])
+    if @review.update_attributes(:done_by => params[:done_by], :status => :done)
+      redirect_to :action => 'index'
+    end
   end
   
   def destroy

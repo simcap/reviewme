@@ -1,7 +1,7 @@
 class Review < ActiveRecord::Base
   has_many :commits, :dependent => :destroy
 
-  attr_accessible :date, :status
+  attr_accessible :date, :status, :done_by
   
   def self.new_pending
     review = Review.new

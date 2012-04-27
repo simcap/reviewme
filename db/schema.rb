@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120427143317) do
   create_table "reviews", :force => true do |t|
     t.datetime "date"
     t.string   "status"
+    t.string   "done_by"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
