@@ -1,16 +1,16 @@
 class ReviewsController < ApplicationController
   
   def index
-    @reviews = Review.all
+    @reviews = Review.order("created_at ASC")
   end
   
   def pending
-    @reviews = Review.where(:status => :pending)
+    @reviews = Review.where(:status => :pending).order("created_at ASC")
     render "index"
   end
 
   def done
-    @reviews = Review.where(:status => :done)
+    @reviews = Review.where(:status => :done).order("created_at ASC")
     render "index"
   end
   
