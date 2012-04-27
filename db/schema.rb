@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427140315) do
+ActiveRecord::Schema.define(:version => 20120427143317) do
 
   create_table "commits", :force => true do |t|
     t.string   "shorthash"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20120427140315) do
     t.string   "email"
     t.text     "message"
     t.datetime "date"
+    t.integer  "review_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "commits", ["review_id"], :name => "index_commits_on_review_id"
+
+  create_table "reviews", :force => true do |t|
+    t.datetime "date"
+    t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
