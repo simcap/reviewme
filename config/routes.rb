@@ -1,7 +1,11 @@
 Reviewme::Application.routes.draw do
   
-  resources :review
-  get 'review/:id' => 'review#show'
+  resources :review do
+    collection do
+        get 'pending'
+        get 'done'
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

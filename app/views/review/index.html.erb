@@ -1,6 +1,6 @@
 <% @reviews.each do |review| %>
   <ul>
-	<li><%= review.date %></li>
+	<li><%= review.date.to_s(:short) %></li>
 	<li><%= review.status %></li>
 	<li><%= review.done_by %></li>
 	<% review.commits.each do |commit| %>
