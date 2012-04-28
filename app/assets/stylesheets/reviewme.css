@@ -1,6 +1,7 @@
 /** Reviews **/
 
 .review {
+	width: 950px;
 	margin: 0 0 10px 0;
 	padding: 10px;
 	border-radius: 15px;
@@ -10,8 +11,12 @@
 	
 }
 
-.review-action {
-	clear: both;
+.review-actions {
+	
+}
+
+.review-actions span{
+	float: right;
 }
 
 
@@ -19,7 +24,7 @@
 	display: block;
 }
 
-.review span.date{
+span.date{
 	font-size: 75%;
 }
 
@@ -31,6 +36,11 @@
 .done {
 	background: rgba(116, 223, 0, 0.6);
 	box-shadow: 3px 3px 4px #000;
+}
+
+.subject {
+	text-align: center;
+	border-bottom: 0.5px solid #ccc;
 }
 
 .gravatar {
@@ -71,7 +81,7 @@ header h1 a {
 }
 
 section {
-	margin-top: 1em;
+	padding-left: 3em;
 }
 
 nav {
