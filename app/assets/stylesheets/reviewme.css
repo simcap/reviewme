@@ -1,8 +1,7 @@
 /** Reviews **/
 
 .review {
-	width: 950px;
-	margin: 0 0 10px 0;
+	margin: 0 0 12px 0;
 	padding: 10px;
 	border-radius: 15px;
 }
@@ -19,12 +18,11 @@
 	float: right;
 }
 
-
 .publisher span {
 	display: block;
 }
 
-span.date{
+.smaller{
 	font-size: 75%;
 }
 
@@ -40,19 +38,34 @@ span.date{
 
 .subject {
 	text-align: center;
-	border-bottom: 0.5px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: .5em;
 }
 
 .gravatar {
 	border-radius: 10px;
 	box-shadow: 3px 3px 4px #000;
-	margin-left: -2px;	
+	margin-top: .2em;
 }
+
+.commit-hash {
+	font: 1em 'andale mono','lucida console', monospace;
+	margin-right: 1em;
+}
+
+.commit-message {
+	font: italic 1em "Georgia",serif;
+}
+
+.commit-branch {
+	text-transform: uppercase;
+}
+
 
 /** Layout **/
 
 .container {
-	width: 1100px;
+	width: 950px;
 }
 
 body {
@@ -81,7 +94,6 @@ header h1 a {
 }
 
 section {
-	padding-left: 3em;
 }
 
 nav {

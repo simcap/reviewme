@@ -1,20 +1,23 @@
 <% @reviews.each do |review| %>
   <div class="review <%= review.status %> span-24 last">
-	<div class="subject span-24 ">
-		Bug in production
+	<div class="subject span-24">
+		<span class="smaller left"><%= review.date.to_s(:short) %></span>
+		<span>Bug in production</span>
+		<span class="smaller right" >my-branch-name</span>
 	</div>
-	<div class="publisher span-6">
-		<span><%= review.publisher_name %></span>
+	<div class="publisher span-4">
 		<span><%= gravatar_image_tag review.publisher_email , :class => "gravatar", :alt => review.publisher_name %></span>
-		<span class="date"><%= review.date.to_s(:short) %></span>
 	</div>
 
-	<div class="commits span-12 last">
+	<div class="commits span-20 last">
 		<% review.commits.each do |commit| %>
-			<div>
-				<span><%= commit.branch %></span>
-				<span><%= commit.shorthash %></span>
-				<span><%= commit.message %></span>
+			<div class="commit">
+				<span class="commit-hash"><%= commit.shorthash %></span>
+				<span class="commit-message"><%= commit.message %></span>
+			</div>
+			<div class="commit">
+				<span class="commit-hash"><%= commit.shorthash %></span>
+				<span class="commit-message"><%= commit.message %></span>
 			</div>
 		<% end %>
 	</div>
