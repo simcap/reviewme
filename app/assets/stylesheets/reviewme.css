@@ -51,6 +51,7 @@ body {
 
 header {
 	padding-top: 20px;
+	margin-bottom: 2em;
 }
 
 header h1 {
@@ -58,18 +59,15 @@ header h1 {
 	font: 400 1em sans-serif;
 	text-shadow: rgba(0, 0, 0, .7) 1px 1px 2px;
 	color: white;
-	margin: .2em 0;
 	line-height: 0.8;
 }
 
 header h1 a {
 	text-decoration: none;
-	font-size: 4em;
-	letter-spacing: -.1em;
+	font-size: 3em;
+	letter-spacing: 5px;
 	margin-right: .15em;
 	position: relative;
-	top: .1em;
-	text-shadow: #EEE -1px -1px 0, #EEE -2px -2px 0, #EEE -3px -3px 0, #EEE -4px -4px 0, rgba(65, 131, 196, .3) -5px -5px 0;
 }
 
 section {
@@ -78,8 +76,8 @@ section {
 
 nav {
 	float: right;
-	padding: 0 0.7em;
 	white-space: nowrap;
+	margin-top: 0.65em;
 }
 
 nav ul {
