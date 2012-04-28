@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(:version => 20120427143317) do
   add_index "commits", ["review_id"], :name => "index_commits_on_review_id"
 
   create_table "reviews", :force => true do |t|
+    t.string   "publisher_email"
+    t.string   "publisher_name"
     t.datetime "date"
     t.string   "status"
     t.string   "done_by"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

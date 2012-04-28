@@ -32,6 +32,7 @@ class ReviewsController < ApplicationController
   
   def create
     @review = Review.new_pending
+    @review.update_attributes(params[:review])
         
     if @review.save    
       @commit = @review.commits.create(params[:commit])
