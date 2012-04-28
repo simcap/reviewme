@@ -2,21 +2,41 @@
 
 .review {
 	margin: 0 0 10px 0;
-	padding: 5px;
+	padding: 10px;
 	border-radius: 15px;
 }
 
+.commits {
+	
+}
+
+.review-action {
+	clear: both;
+}
+
+
+.publisher span {
+	display: block;
+}
+
+.review span.date{
+	font-size: 75%;
+}
+
 .pending {
-	border: 1px solid red;
+	background: #FF4000;
+	box-shadow: 3px 3px 4px #000;
 }
 
 .done {
-	border: 1px solid green;
+	background: #74DF00;
+	box-shadow: 3px 3px 4px #000;
 }
 
 .gravatar {
 	border-radius: 10px;
-	box-shadow: 3px 3px 4px #000;	
+	box-shadow: 3px 3px 4px #000;
+	margin-left: -2px;	
 }
 
 /** Layout **/
@@ -25,8 +45,31 @@
 	width: 1100px;
 }
 
+body {
+	background: #ccc;
+}
+
 header {
 	padding-top: 20px;
+}
+
+header h1 {
+	display: inline;
+	font: 400 1em sans-serif;
+	text-shadow: rgba(0, 0, 0, .7) 1px 1px 2px;
+	color: white;
+	margin: .2em 0;
+	line-height: 0.8;
+}
+
+header h1 a {
+	text-decoration: none;
+	font-size: 4em;
+	letter-spacing: -.1em;
+	margin-right: .15em;
+	position: relative;
+	top: .1em;
+	text-shadow: #EEE -1px -1px 0, #EEE -2px -2px 0, #EEE -3px -3px 0, #EEE -4px -4px 0, rgba(65, 131, 196, .3) -5px -5px 0;
 }
 
 section {
