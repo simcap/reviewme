@@ -3,6 +3,7 @@ class CreateReviews < ActiveRecord::Migration
     create_table :reviews do |t|
       t.string :publisher_email
       t.string :publisher_name
+      t.string :branch
       t.datetime :date
       t.string :status
       t.string :done_by

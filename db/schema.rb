@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(:version => 20120427143317) do
 
   create_table "commits", :force => true do |t|
     t.string   "shorthash"
-    t.string   "branch"
     t.string   "email"
     t.text     "message"
     t.datetime "date"
@@ -29,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20120427143317) do
   create_table "reviews", :force => true do |t|
     t.string   "publisher_email"
     t.string   "publisher_name"
+    t.string   "branch"
     t.datetime "date"
     t.string   "status"
     t.string   "done_by"
