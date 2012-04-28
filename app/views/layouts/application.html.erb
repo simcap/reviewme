@@ -2,15 +2,18 @@
 <html>
 <head>
   <title>Reviewme</title>
-  <%= stylesheet_link_tag    "blueprint/screen", :media => "screen" %>
-  <%= stylesheet_link_tag    "blueprint/print", :media => "print" %>
+  <!-- meta http-equiv="Refresh" content="5" -->
+  <%= render 'layouts/stylesheets'%> 	
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h3>Reviewme</h3>
-
-<%= yield %>
-
+  <div class="container">
+	<%= render 'layouts/header'%> 	
+	<section>
+		<%= yield %>
+	</section>
+	<%= render 'layouts/footer'%> 	
+  </div>
 </body>
 </html>
