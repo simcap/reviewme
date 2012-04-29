@@ -1,5 +1,7 @@
 Reviewme::Application.routes.draw do
   
+  resources :reviewers
+
   root :to => 'reviews#pending'
   
   resources :reviews do

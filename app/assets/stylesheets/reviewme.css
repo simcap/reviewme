@@ -1,10 +1,19 @@
 /** Reviews **/
 
-.review {
-	font-size: 120%;
+.box {
 	margin: 0 0 12px 0;
 	padding: 10px;
 	border-radius: 15px;
+	box-shadow: 3px 3px 4px #000;
+}
+
+.review {
+	font-size: 120%;
+}
+
+.reviewer {
+	margin: 0 20px 12px 0;
+	background: rgba(255, 255, 255, 0.6);
 }
 
 .commits {
@@ -29,12 +38,10 @@
 
 .pending {
 	background: rgba(255, 54, 0, 0.6);
-	box-shadow: 3px 3px 4px #000;
 }
 
 .done {
 	background: rgba(116, 223, 0, 0.6);
-	box-shadow: 3px 3px 4px #000;
 }
 
 .subject {

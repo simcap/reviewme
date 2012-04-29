@@ -33,11 +33,13 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new_pending
     @review.update_attributes(params[:review])
+    
+    Reviewer.create(:email => @review.publisher_email) unless Reviewer.exists?(:email => @review.publisher_email)
         
     if @review.save    
       @commit = @review.commits.create(params[:commit])
       if @commit.save
-        render :text => "You have successfully published your commit for review... It'd better be clean and tested ;)"
+        render :text => "You have successfully published your commit for review to " + reviews_url + "... It'd better be clean and tested ;)"
       end
     end
   end
