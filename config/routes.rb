@@ -1,9 +1,15 @@
 Reviewme::Application.routes.draw do
-  
-  resources :reviewers
 
   root :to => 'reviews#pending'
   
+  resources :sessions, :only => [:new, :create, :destroy]
+  
+  match '/login', :to => 'sessions#new'
+  match '/logout', :to => 'sessions#destroy'
+  
+
+  resources :reviewers
+
   resources :reviews do
     collection do
         get 'pending'

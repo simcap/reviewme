@@ -7,6 +7,14 @@
 			<li><%= link_to "all", reviews_path %></li>
 			<li> | </li>
 			<li><%= link_to "reviewers", reviewers_path %></li>
+			<li> | </li>
+			<% if signed_in? %>
+				<li><%= session[:email] %></li>
+				<li> | </li>
+				<li><%= link_to "log out", logout_path, :method => :delete %></li>
+			<% else %>
+				<li><%= link_to "log in", login_path %></li>
+			<% end %>
 		</ul>
 	</nav>
 </header>
