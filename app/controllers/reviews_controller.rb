@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
   
   def update
     @review = Review.find(params[:id])
-    if @review.update_attributes(:done_by => params[:done_by], :status => :done)
+    if @review.update_attributes(:reviewer_id => session[:reviewer].id, :status => :done)
       redirect_to :action => 'pending'
     end
   end

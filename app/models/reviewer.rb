@@ -1,3 +1,5 @@
 class Reviewer < ActiveRecord::Base
-  attr_accessible :email
+  has_many :reviews
+  
+  attr_accessible :id, :email
 end

@@ -34,10 +34,11 @@ ActiveRecord::Schema.define(:version => 20120429153823) do
   create_table "reviews", :force => true do |t|
     t.string   "publisher_email"
     t.string   "publisher_name"
+    t.string   "subject"
     t.string   "branch"
     t.datetime "date"
     t.string   "status"
-    t.string   "done_by"
+    t.integer  "reviewer_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

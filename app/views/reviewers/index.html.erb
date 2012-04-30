@@ -1,8 +1,8 @@
 <% @reviewers.each do |reviewer| %>
-  <div class="box reviewer span-8">
+  <div class="box reviewer span-10">
 	<div class="span-3"><%= gravatar_image_tag reviewer.email , :class => "gravatar", :alt => reviewer.email %></div>
-	<div class="span-5 last"><%= reviewer.email %></div>
-    <div class="span-8 last"><span class="right"><%= button_to 'Discard', reviewer, confirm: 'Are you sure?', method: :delete %></span></div>
+	<div class="span-7 last"><%= reviewer.email %></div>
+    <div class="span-10 last"><span class="right"><%= button_to 'Discard', reviewer, confirm: 'Are you sure?', method: :delete %></span></div>
   </div>
 <% end %>
 </table>
