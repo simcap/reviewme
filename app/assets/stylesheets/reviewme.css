@@ -7,6 +7,13 @@
 	box-shadow: 3px 3px 4px #000;
 }
 
+.squarebox {
+	margin: 0 0 12px 0;
+	padding: 10px;
+	box-shadow: 2px 2px 0 #ccc,-2px -2px 0 #fff;
+	background: rgba(255, 255, 255, 0.6);
+}
+
 .review {
 	font-size: 120%;
 }
@@ -86,7 +93,7 @@ header {
 
 header h1 {
 	display: inline;
-	font: 400 1em sans-serif;
+	font: 500 1.2em sans-serif;
 	text-shadow: rgba(0, 0, 0, .7) 1px 1px 2px;
 	color: white;
 	line-height: 0.8;
@@ -95,7 +102,7 @@ header h1 {
 header h1 a {
 	text-decoration: none;
 	font-size: 3em;
-	letter-spacing: 5px;
+	letter-spacing: 7px;
 	margin-right: .15em;
 	position: relative;
 }
