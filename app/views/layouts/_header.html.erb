@@ -9,9 +9,8 @@
 			<li><%= link_to "reviewers", reviewers_path %></li>
 			<li> | </li>
 			<% if signed_in? %>
-				<li><%= session[:email] %></li>
-				<li> | </li>
 				<li><%= link_to "log out", logout_path, :method => :delete %></li>
+				<li>(<%= session[:email] %>)</li>
 			<% else %>
 				<li><%= link_to "log in", login_path %></li>
 			<% end %>
