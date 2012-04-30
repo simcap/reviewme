@@ -76,7 +76,7 @@
 }
 
 body {
-	background: #ccc;
+	background-image: url('background.gif');
 }
 
 header {
