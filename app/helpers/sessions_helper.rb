@@ -1,7 +1,7 @@
 module SessionsHelper
   
   def signed_in?
-    session[:email]
+    session[:reviewer]
   end
 
 end

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    session[:email] = nil
+    session[:reviewer] = nil
     redirect_to reviews_url
   end
 
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       flash.now[:error] = "This email does not belong to a reviewer!"
       render 'new'      
     else
-      session[:email] = reviewer.email
+      session[:reviewer] = reviewer
       redirect_to reviews_url
     end
     
