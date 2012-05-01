@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-current_branch = `git name-rev --name-only HEAD`
-reviewme_server_url = `git config reviewme.server.url`
-publisher_email = `git config user.email`
-publisher_name = `git config user.name`
+current_branch = `git symbolic-ref HEAD`.chomp.split('/').last
+reviewme_server_url = `git config reviewme.server.url`.chomp
+publisher_email = `git config user.email`.chomp
+publisher_name = `git config user.name`.chomp
 
 if (reviewme_server_url.strip.empty?)
 	puts 'You need to configure the reviewme_server_url'
