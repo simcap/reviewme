@@ -5,14 +5,6 @@ reviewme_server_url = `git config reviewme.server.url`.chomp
 publisher_email = `git config user.email`.chomp
 publisher_name = `git config user.name`.chomp
 
-if (reviewme_server_url.strip.empty?)
-	puts 'You need to configure the reviewme_server_url'
-end
-
-if (publisher_email.strip.empty?)
-	puts 'You need to have an email address configured in order to publish reviews'
-end
-
 number_of_commits = (ARGV[0] || 1).to_i
 
 commit_shorthashes = %x[git log -#{number_of_commits} --pretty=format:'%h'].split("\n")

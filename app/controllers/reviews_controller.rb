@@ -32,17 +32,14 @@ class ReviewsController < ApplicationController
   
   def create
     @review = Review.new_pending
-    @review.update_attributes(params[:review])
+    @review.attributes = params[:review]    
+    @review.add_commits(params[:commit])
     
-    Reviewer.create(:email => @review.publisher_email) unless Reviewer.exists?(:email => @review.publisher_email)
-        
     if @review.save
-      params[:commit].each do |submitted_commit|
-        @commit = @review.commits.create(submitted_commit)
-        if @commit.save
-        end
-      end
+      Reviewer.register_new_publisher_as_reviewer(@review)    
       render :text => "You have successfully published your commit for review to " + reviews_url + "... It'd better be clean and tested ;)"
+    else
+      render :text => "Could not save your review. Errors are: " << @review.errors.to_a.join(", ")
     end
   end
 
