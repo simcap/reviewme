@@ -37,11 +37,7 @@ class ReviewsController < ApplicationController
     Reviewer.create(:email => @review.publisher_email) unless Reviewer.exists?(:email => @review.publisher_email)
         
     if @review.save
-      logger.info "+++++++++++++++++++++"
-      logger.info params[:commit][0]
       params[:commit].each do |submitted_commit|
-        logger.info "------------------"
-        logger.info submitted_commit  
         @commit = @review.commits.create(submitted_commit)
         if @commit.save
         end
