@@ -36,11 +36,17 @@ class ReviewsController < ApplicationController
     
     Reviewer.create(:email => @review.publisher_email) unless Reviewer.exists?(:email => @review.publisher_email)
         
-    if @review.save    
-      @commit = @review.commits.create(params[:commit])
-      if @commit.save
-        render :text => "You have successfully published your commit for review to " + reviews_url + "... It'd better be clean and tested ;)"
+    if @review.save
+      logger.info "+++++++++++++++++++++"
+      logger.info params[:commit][0]
+      params[:commit].each do |submitted_commit|
+        logger.info "------------------"
+        logger.info submitted_commit  
+        @commit = @review.commits.create(submitted_commit)
+        if @commit.save
+        end
       end
+      render :text => "You have successfully published your commit for review to " + reviews_url + "... It'd better be clean and tested ;)"
     end
   end
 

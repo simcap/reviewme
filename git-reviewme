@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+current_branch = `git name-rev --name-only HEAD`
+reviewme_server_url = `git config reviewme.server.url`
+publisher_email = `git config user.email`
+publisher_name = `git config user.name`
+
+if (reviewme_server_url.strip.empty?)
+	puts 'You need to configure the reviewme_server_url'
+end
+
+if (publisher_email.strip.empty?)
+	puts 'You need to have an email address configured in order to publish reviews'
+end
+
+number_of_commits = (ARGV[0] || 1).to_i
+
+commit_shorthashes = %x[git log -#{number_of_commits} --pretty=format:'%h'].split("\n")
+commit_emails = %x[git log -#{number_of_commits} --pretty=format:'%ce'].split("\n")
+commit_messages = %x[git log -#{number_of_commits} --pretty=format:'%s'].split("\n")
+commit_dates = %x[git log -#{number_of_commits} --pretty=format:'%ci'].split("\n")
+
+post_query = "review[publisher_email]=#{publisher_email}&review[publisher_name]=#{publisher_name}&review[branch]=#{current_branch}"
+
+number_of_commits.times { |i|
+  post_query << "&commit[][shorthash]=#{commit_shorthashes[i]}"
+  post_query << "&commit[][message]=#{commit_messages[i]}"
+  post_query << "&commit[][email]=#{commit_emails[i]}"
+  post_query << "&commit[][date]=#{commit_dates[i]}"  
+}
+
+exec("curl -d '" << post_query << "' #{reviewme_server_url}")
