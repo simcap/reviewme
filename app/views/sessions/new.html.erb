@@ -2,10 +2,11 @@
    <p><%= flash[:error] %></p>
 <% end %>
 
-<div class="squarebox span-10 last">
-<%= form_for(:session, :url => sessions_path) do |f| %>
-		<%= f.label "Enter you email"%>
-		<%= f.text_field :email%>
-		<%= f.submit "Log in"%>
-<% end %>
+<div class="span-7 prepend-8 append-8 last">
+	<div class="squarebox">	
+		<%= form_for(:session, :url => sessions_path) do |f| %>
+			<%= f.text_field :email%>
+			<%= f.submit "Log in"%>
+		<% end %>
+	</div>
 </div>
