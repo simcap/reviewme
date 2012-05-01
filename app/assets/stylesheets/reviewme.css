@@ -51,6 +51,10 @@
 	background: rgba(116, 223, 0, 0.6);
 }
 
+.reviewer-email {
+	color: white;
+}
+
 .subject {
 	text-align: center;
 	border-bottom: 1px solid #ccc;
@@ -82,13 +86,14 @@
 	width: 950px;
 }
 
-body {
+body {	
 	background-image: url('background.gif');
 }
 
 header {
-	padding-top: 20px;
+	padding: 10px 100px 10px 100px;
 	margin-bottom: 2em;
+	background-image: url('reviewme-header-bg.png');
 }
 
 header h1 {
@@ -103,8 +108,8 @@ header h1 a {
 	text-decoration: none;
 	font-size: 3em;
 	letter-spacing: 7px;
-	margin-right: .15em;
 	position: relative;
+	padding-left: -1em;
 }
 
 section {

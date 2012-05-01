@@ -9,7 +9,7 @@
 			<li> | </li>
 			<% if signed_in? %>
 				<li><%= link_to "log out", logout_path, :method => :delete %></li>
-				<li>(<%= session[:reviewer].email %>)</li>
+				<li class="reviewer-email">(<%= session[:reviewer].email %>)</li>
 			<% else %>
 				<li><%= link_to "log in", login_path %></li>
 			<% end %>
