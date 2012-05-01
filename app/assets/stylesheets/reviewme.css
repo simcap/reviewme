@@ -51,8 +51,9 @@
 	background: rgba(116, 223, 0, 0.6);
 }
 
-.reviewer-email {
+.white {
 	color: white;
+	font-weight:bold;
 }
 
 .subject {
