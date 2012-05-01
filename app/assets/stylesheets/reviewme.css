@@ -90,10 +90,14 @@ body {
 	background-image: url('background.gif');
 }
 
+a {
+	color: #09F;
+}
+
 header {
 	padding: 10px 100px 10px 100px;
 	margin-bottom: 2em;
-	background-image: url('reviewme-header-bg.png');
+	background-image: url('header-bg.png');
 }
 
 header h1 {
