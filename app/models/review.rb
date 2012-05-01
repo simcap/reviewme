@@ -4,9 +4,7 @@ class Review < ActiveRecord::Base
   belongs_to :reviewer
 
   attr_accessible :publisher_email, :publisher_name, :subject, :branch, :date, :status, :reviewer_id
-  
-  accepts_nested_attributes_for :commits
-  
+    
   def self.new_pending
     review = Review.new
     review.date = Time.now
