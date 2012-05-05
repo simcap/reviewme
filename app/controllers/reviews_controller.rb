@@ -40,7 +40,7 @@ class ReviewsController < ApplicationController
       Reviewer.register_new_publisher_as_reviewer(@review)    
       render :text => "You have successfully published your commit for review to " + reviews_url + "... It'd better be clean and tested ;)"
     else
-      render :text => "Could not save your review. Errors are: " << @review.errors.to_a.join(", ")
+      render :text => "Could not save your review. Errors are:\n" << @review.errors_to_text
     end
   end
   

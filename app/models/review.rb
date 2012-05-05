@@ -20,4 +20,18 @@ class Review < ActiveRecord::Base
     review.status = :pending
     return review
   end
+  
+  def errors_to_text
+    text = "Review:\n"
+    self.errors.each { |attr, msg|
+      text << "- #{attr} #{msg}\n" unless attr == :commits  
+    }
+    self.commits.each_with_index { |commit, index|
+      text << "Commit #{index}:\n"
+      commit.errors.each { |attr, msg|
+        text << "- #{attr} #{msg}\n"   
+      }
+    }
+    return text
+  end
 end
