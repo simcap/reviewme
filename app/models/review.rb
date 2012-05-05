@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
-  validates :publisher_email, :branch, :presence => true
-  validates_associated :commits
+  validate :maximum_number_of_commits_per_review
+  validates :publisher_email, :branch, :presence => true  
   
   has_many :commits, :dependent => :destroy
   
@@ -24,14 +24,23 @@ class Review < ActiveRecord::Base
   def errors_to_text
     text = "Review:\n"
     self.errors.each { |attr, msg|
-      text << "- #{attr} #{msg}\n" unless attr == :commits  
+      text << "- #{attr} #{msg}\n" unless msg.include? "is invalid"  
     }
     self.commits.each_with_index { |commit, index|
-      text << "Commit #{index}:\n"
-      commit.errors.each { |attr, msg|
-        text << "- #{attr} #{msg}\n"   
-      }
+      if(not commit.errors.empty?)
+        text << "Commit #{index}:\n"
+        commit.errors.each { |attr, msg|
+          text << "- #{attr} #{msg}\n"   
+        }
+      end
     }
     return text
   end
+  
+  def maximum_number_of_commits_per_review
+    if self.commits.size > 5
+      errors.add(:commits, "maximum of 5 per review")
+    end
+  end
+  
 end

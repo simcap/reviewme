@@ -38,15 +38,15 @@ class ReviewsController < ApplicationController
         
     if @review.save
       Reviewer.register_new_publisher_as_reviewer(@review)    
-      render :text => "You have successfully published your commit for review to " + reviews_url + "... It'd better be clean and tested ;)"
+      render :text => "Review successfully published to " + reviews_url + "... It'd better be clean and tested ;)"
     else
-      render :text => "Could not save your review. Errors are:\n" << @review.errors_to_text
+      render :text => "Could not publish your review. Errors are:\n" << @review.errors_to_text
     end
   end
   
   private
   
-  # Allow to remove carriage returns and new lines from reviews submitted from git the command line
+  # Allow to remove carriage returns and new lines from reviews submitted from the git the command line
   def sanitize_review_attrs
     params[:review].each_value { |review_attr|
       review_attr.chomp! unless review_attr.nil?
