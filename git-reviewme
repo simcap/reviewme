@@ -1,24 +1,70 @@
 #!/usr/bin/env ruby
+require 'optparse'
 
+# Getting main git info
 current_branch = `git symbolic-ref HEAD`.chomp.split('/').last
 reviewme_server_url = `git config reviewme.server.url`.chomp
 publisher_email = `git config user.email`.chomp
 publisher_name = `git config user.name`.chomp
 
-number_of_commits = (ARGV[0] || 1).to_i
+# Checking correct local configuration
+email_config = <<INSTR
+You need to configure a user email with:
+$ git config user.email myusername@email.com
+INSTR
 
-commit_shorthashes = %x[git log -#{number_of_commits} --pretty=format:'%h'].split("\n")
-commit_emails = %x[git log -#{number_of_commits} --pretty=format:'%ce'].split("\n")
-commit_messages = %x[git log -#{number_of_commits} --pretty=format:'%s'].split("\n")
-commit_dates = %x[git log -#{number_of_commits} --pretty=format:'%ci'].split("\n")
+review_server_config = <<INSTR
+You need to configure the url for the reviewme server with:
+$ git config reviewme.server.url http://reviewme.server.com/reviews
+INSTR
 
-post_query = "review[publisher_email]=#{publisher_email}&review[publisher_name]=#{publisher_name}&review[branch]=#{current_branch}"
+if publisher_email.strip.empty?
+  puts email_config
+  exit
+end
 
-number_of_commits.times { |i|
+if reviewme_server_url.strip.empty?
+  puts review_server_config
+  exit
+end
+
+
+# Defining options parsing
+options = {}
+
+optparse = OptionParser.new do |opts|
+  options[:commits_number] = 1
+  opts.on( '-n', '--number NUMBER', Integer, 'Number of the last commits that will be included in the published review' ) do |number|
+    options[:commits_number] = number
+  end
+  
+  opts.on( '-s', '--subject SUBJECT', 'Subject of the published review' ) do |subject|
+    options[:review_subject] = subject || ""
+  end
+  
+  opts.on( '-h', '--help', 'Display this screen' ) do
+    puts opts
+    exit
+  end 
+end
+
+# The actual parsing
+optparse.parse!
+
+# Preparing POST
+commit_shorthashes = %x[git log -#{options[:commits_number]} --pretty=format:'%h'].split("\n")
+commit_emails = %x[git log -#{options[:commits_number]} --pretty=format:'%ce'].split("\n")
+commit_messages = %x[git log -#{options[:commits_number]} --pretty=format:'%s'].split("\n")
+commit_dates = %x[git log -#{options[:commits_number]} --pretty=format:'%ci'].split("\n")
+
+post_query = "review[publisher_email]=#{publisher_email}&review[publisher_name]=#{publisher_name}&review[branch]=#{current_branch}&review[subject]=#{options[:review_subject]}"
+
+options[:commits_number].times { |i|
   post_query << "&commit[][shorthash]=#{commit_shorthashes[i]}"
   post_query << "&commit[][message]=#{commit_messages[i]}"
   post_query << "&commit[][email]=#{commit_emails[i]}"
   post_query << "&commit[][date]=#{commit_dates[i]}"  
 }
 
+# POST to server
 exec("curl -d '" << post_query << "' #{reviewme_server_url}")

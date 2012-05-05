@@ -56,7 +56,8 @@
 	font-weight:bold;
 }
 
-.subject {
+
+.title {
 	text-align: center;
 	border-bottom: 1px solid #ccc;
 	margin-bottom: .5em;
@@ -79,6 +80,11 @@
 
 .commit-branch {
 	text-transform: uppercase;
+}
+
+.subject {
+	text-transform: uppercase;
+	font-weight: bold;
 }
 
 /** Layout **/

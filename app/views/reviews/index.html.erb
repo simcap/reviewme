@@ -1,8 +1,8 @@
 <% @reviews.each do |review| %>
   <div class="box review <%= review.status %> span-24 last">
-	<div class="subject span-24">
+	<div class="title span-24">
 		<span class="smaller left"><%= review.date.to_s(:short) %></span>
-		<span></span>
+		<span class="subject"><%= review.subject %></span>
 		<span class="smaller right"><%= review.branch %></span>
 	</div>
 	<div class="publisher span-4">
