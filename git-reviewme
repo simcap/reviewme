@@ -58,10 +58,20 @@ rescue OptionParser::InvalidOption, OptionParser::InvalidArgument, OptionParser:
 end
 
 # Preparing POST
-commit_shorthashes = %x[git log -#{options[:commits_number]} --pretty=format:'%h'].split("\n")
-commit_emails = %x[git log -#{options[:commits_number]} --pretty=format:'%ce'].split("\n")
-commit_messages = %x[git log -#{options[:commits_number]} --pretty=format:'%s'].split("\n")
-commit_dates = %x[git log -#{options[:commits_number]} --pretty=format:'%ci'].split("\n")
+commit_shorthashes = []
+commit_emails = []
+commit_messages = []
+commit_dates = []
+
+commit_lines = %x[git log -#{options[:commits_number]} --pretty=format:'%h||%ce||%s||%ci']
+
+commit_lines.each_line {|line|
+  commit_fields = line.split("||")
+  commit_shorthashes << commit_fields[0]
+  commit_emails << commit_fields[1]
+  commit_messages << commit_fields[2]
+  commit_dates << commit_fields[3]
+}
 
 post_query = "review[publisher_email]=#{publisher_email}&review[publisher_name]=#{publisher_name}&review[branch]=#{current_branch}&review[subject]=#{options[:review_subject]}"
 
