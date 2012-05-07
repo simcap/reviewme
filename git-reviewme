@@ -32,7 +32,27 @@ end
 # Defining options parsing
 options = {}
 
+examples = <<EX
+    # Publish the last commit
+    $ git reviewme
+
+    # Publish the last commit and a subject for the review
+    $ git reviewme -s"Fixing production bug"
+
+    # Publish the 3 last commits from natural log ordering
+    $ git reviewme -n3
+
+    # Publish specific commits using short hashes
+    $ git reviewme 0ecbac9 10dcc09 2a9a2c8  
+
+    # Publish specific commits with a subject for the review
+    $ git reviewme 0ecbac9 10dcc09 2a9a2c8 -s"Patching production"
+EX
+
 optparse = OptionParser.new do |opts|
+  opts.banner = "USAGE\n     git reviewme [-n] [-s] [<commit hashes>...]"
+  opts.separator "\nOPTIONS\n"
+  
   options[:commits_number] = 1
   opts.on( '-n', '--number NUMBER', Integer, 'Number of the last commits that will be included in the published review' ) do |number|
     options[:commits_number] = number
@@ -44,8 +64,10 @@ optparse = OptionParser.new do |opts|
   
   opts.on( '-h', '--help', 'Display this screen' ) do
     puts opts
+    puts examples
     exit
   end 
+  opts.separator "\nEXAMPLES"  
 end
 
 # The actual parsing
@@ -57,29 +79,33 @@ rescue OptionParser::InvalidOption, OptionParser::InvalidArgument, OptionParser:
   exit
 end
 
-# Preparing POST
-commit_shorthashes = []
-commit_emails = []
-commit_messages = []
-commit_dates = []
+def publish_specific_commits?
+  not ARGV.empty?
+end
 
-commit_lines = %x[git log -#{options[:commits_number]} --pretty=format:'%h||%ce||%s||%ci']
+# Getting commits info
+commits_to_publish = []
 
-commit_lines.each_line {|line|
-  commit_fields = line.split("||")
-  commit_shorthashes << commit_fields[0]
-  commit_emails << commit_fields[1]
-  commit_messages << commit_fields[2]
-  commit_dates << commit_fields[3]
-}
+if publish_specific_commits?
+  commit_queue = %x[git log -50 --pretty=format:'%H||%ce||%s||%ci']
+  commit_queue.each_line { |commit|
+    if commit.start_with?(*ARGV)
+      commits_to_publish << commit
+    end
+  }
+else
+  commits_to_publish = %x[git log -#{options[:commits_number]} --pretty=format:'%H||%ce||%s||%ci'].split("\n")
+end
 
+# Preparing POST query
 post_query = "review[publisher_email]=#{publisher_email}&review[publisher_name]=#{publisher_name}&review[branch]=#{current_branch}&review[subject]=#{options[:review_subject]}"
 
-options[:commits_number].times { |i|
-  post_query << "&commit[][shorthash]=#{commit_shorthashes[i]}"
-  post_query << "&commit[][message]=#{commit_messages[i]}"
-  post_query << "&commit[][email]=#{commit_emails[i]}"
-  post_query << "&commit[][date]=#{commit_dates[i]}"  
+commits_to_publish.each {|commit_line|
+  commit_fields = commit_line.split("||")
+  post_query << "&commit[][shorthash]=#{commit_fields[0][0..6]}"
+  post_query << "&commit[][email]=#{commit_fields[1]}"
+  post_query << "&commit[][message]=#{commit_fields[2]}"
+  post_query << "&commit[][date]=#{commit_fields[3]}"  
 }
 
 # POST to server
