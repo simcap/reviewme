@@ -8,23 +8,19 @@ publisher_email = `git config user.email`.chomp
 publisher_name = `git config user.name`.chomp
 
 # Checking correct local configuration
-email_config = <<INSTR
+if publisher_email.strip.empty?
+  puts <<-INSTR
 You need to configure a user email with:
 $ git config --global user.email myusername@email.com
 INSTR
-
-review_server_config = <<INSTR
-You need to configure the url for the reviewme server with:
-$ git config --global reviewme.server.url http://reviewme.server.com/reviews
-INSTR
-
-if publisher_email.strip.empty?
-  puts email_config
   exit
 end
 
 if reviewme_server_url.strip.empty?
-  puts review_server_config
+  puts <<-INSTR
+You need to configure the url for the reviewme server with:
+$ git config --global reviewme.server.url http://reviewme.server.com/reviews
+INSTR
   exit
 end
 
