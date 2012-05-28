@@ -46,7 +46,7 @@ class ReviewsController < ApplicationController
   
   private
   
-  # Allow to remove carriage returns and new lines from reviews submitted from the git the command line
+  # Allow to remove carriage returns and new lines from reviews submitted from the git command line
   def sanitize_review_attrs
     params[:review].each_value { |review_attr|
       review_attr.chomp! unless review_attr.nil?
