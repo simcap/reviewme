@@ -5,11 +5,11 @@
 		<span class="subject"><%= review.subject %></span>
 		<span class="smaller right"><%= review.branch %></span>
 	</div>
-	<div class="publisher span-4">
+	<div class="photo span-4">
 		<span><%= gravatar_image_tag review.publisher_email , :class => "gravatar", :alt => review.publisher_name %></span>
 	</div>
 
-	<div class="commits span-20 last">
+	<div class="commits span-18 last">
 		<% review.commits.each do |commit| %>
 			<div class="commit">
 				<span class="commit-hash"><%= commit.shorthash %></span>
@@ -17,6 +17,13 @@
 			</div>			
 		<% end %>
 	</div>
+	
+	<% if review_done?(review)%>
+		<% reviewer_email = Reviewer.where(:id => review.reviewer_id).first.email %>
+		<div class="photo span-2 last">
+			<span><%= gravatar_image_tag reviewer_email , :class => "gravatar", :alt => reviewer_email %></span>
+		</div>
+	<% end %>
 	
 	<% if signed_in?%>
 	<div class="review-actions span-24 last">
