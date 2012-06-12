@@ -4,13 +4,19 @@
 	margin: 0 0 12px 0;
 	padding: 10px;
 	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
 	box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	-moz-box-shadow: 3px 3px 4px #000;
 }
 
 .squarebox {
 	margin: 0 0 12px 0;
 	padding: 10px;
 	box-shadow: 2px 2px 0 #ccc,-2px -2px 0 #fff;
+	-webkit-box-shadow: 2px 2px 0 #ccc,-2px -2px 0 #fff;
+	-moz-box-shadow: 2px 2px 0 #ccc,-2px -2px 0 #fff;
 	background: rgba(255, 255, 255, 0.6);
 }
 
@@ -77,8 +83,12 @@
 }
 
 .gravatar {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
 	border-radius: 10px;
 	box-shadow: 3px 3px 4px #000;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
 	margin-top: .2em;
 }
 
