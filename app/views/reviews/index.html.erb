@@ -21,7 +21,7 @@
 	<% if review_done?(review)%>
 		<% reviewer_email = Reviewer.where(:id => review.reviewer_id).first.email %>
 		<div class="photo span-2 last">
-			<span><%= gravatar_image_tag reviewer_email , :class => "gravatar", :alt => reviewer_email %></span>
+			<span><%= gravatar_image_tag reviewer_email , :class => "gravatar", :alt => reviewer_email, :gravatar => { :size => 50 } %></span>
 		</div>
 	<% end %>
 	
